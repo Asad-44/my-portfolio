@@ -81,7 +81,7 @@
   .hero{
     background:var(--ink);
     color:var(--paper);
-    padding:100px 0 84px;
+    padding:65px 0 84px;
     position:relative;
     overflow:hidden;
   }
@@ -189,14 +189,22 @@
     padding:24px;
   }
   .fact-row{
-    display:flex;justify-content:space-between;
-    padding:12px 0;
-    border-bottom:1px solid var(--line-light);
-    font-size:14px;
-  }
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  padding:12px 0;
+  border-bottom:1px solid var(--line-light);
+  font-size:14px;
+}
   .fact-row:last-child{border-bottom:none;}
   .fact-row .k{color:var(--graphite);}
-  .fact-row .v{font-weight:600;font-family:'IBM Plex Mono',monospace;}
+  .fact-row .v{
+  font-weight:600;
+  font-family:'IBM Plex Mono',monospace;
+  text-align:right;
+  line-height:1.5;
+}
   @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
 
   /* PROJECTS */
@@ -339,6 +347,26 @@
     .contact h2{font-size:32px;}
     .about-grid h2{font-size:26px;}
   }
+  .proj-panel{
+  height:350px; /* adjust as needed */
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--ink-2);
+}
+
+.project-img{
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+}
+
+.project-img:hover{
+  transform:scale(1.02);
+}
 </style>
 </head>
 <body>
@@ -366,13 +394,18 @@
         <p class="lede">Asad — a Software Engineering undergraduate who ships full projects end to end, with a growing focus on cybersecurity: cloud security, network security, and the encryption and forensics underneath it all.</p>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-solid">See the work</a>
-          <a href="resume.pdf" class="btn btn-outline">View résumé</a>
+          <a href="/Asad_s_Resume.pdf"
+   class="btn btn-outline"
+   target="_blank"
+   rel="noopener noreferrer">
+   View résumé
+</a>
           <a href="#contact" class="btn btn-outline">Say hello</a>
         </div>
       </div>
-      <div class="stamp">
+      <!-- <div class="stamp">
         <span>secured<br>by design<br>— 2026 —</span>
-      </div>
+      </div> -->
     </div>
   </section>
 
@@ -385,8 +418,11 @@
           <p class="dropcap">I'm currently pursuing my Bachelors in Software Engineering from COMSATS University Islamabad, Lahore Campus and most of my time goes into shipping complete projects — architecture, backend, interface, deployment — rather than isolated exercises. Alongside that, I've been going deeper into security: applied cryptography, digital forensics fundamentals, and how attackers approach systems, which is shaping where I want my final year project and early career to go.</p>
         </div>
         <div class="fact-card">
-          <div class="fact-row"><span class="k">Focus</span><span class="v">Software Engineering · Cybersecurity · Network Security</span></div>
-          <div class="fact-row"><span class="k">Languages</span><span class="v">5</span></div>
+          <div class="fact-row">
+  <span class="k">Focus</span>
+  <span class="v">Software Engineering<br>Cybersecurity<br>Network Security</span>
+</div>
+          <!-- <div class="fact-row"><span class="k">Languages</span><span class="v">5</span></div> -->
           <div class="fact-row"><span class="k">Shipped projects</span><span class="v">2+</span></div>
           <div class="fact-row"><span class="k">Based in</span><span class="v">Lahore, Pakistan</span></div>
           <div class="fact-row"><span class="k">Status</span><span class="v">open to work</span></div>
@@ -401,26 +437,28 @@
       <h2>Selected projects</h2>
 
       <div class="proj-row">
-        <div class="proj-panel"><span class="num">01</span></div>
+        <div class="proj-panel">
+  <img src="/lockbox.png" alt="LockBox Screenshot" class="project-img">
+</div>
         <div class="proj-info">
           <h3>LockBox</h3>
           <span class="proj-tag">live</span>
           <p>A zero-knowledge, encrypted note-sharing app — notes are encrypted client-side before they ever reach the server, so the backend never sees plaintext. Migrated the data layer from MSSQL to a managed Redis instance, replaced CryptoJS with the native Web Crypto API (AES-256-GCM + PBKDF2), and refactored a monolithic script into separate UI, crypto, and API modules. Deployed on Render.</p>
           <div class="proj-links">
-            <a href="https://lockbox-5it9.onrender.com">Live demo →</a>
-            <a href="https://github.com/Asad-44/LockBox.git">Source →</a>
+            <a href="https://lockbox-5it9.onrender.com" target="_blank" rel="noopener noreferrer">Live demo →</a>
+<a href="https://github.com/Asad-44/LockBox.git" target="_blank" rel="noopener noreferrer">Source →</a>
           </div>
         </div>
       </div>
 
       <div class="proj-row reverse">
-        <div class="proj-panel"><span class="num">02</span></div>
+        <div class="proj-panel"><span class="num">Ride Revenue Tracker</span></div>
         <div class="proj-info">
           <h3>Ride Revenue Tracker</h3>
           <span class="proj-tag">complete</span>
           <p>A revenue tracking tool for ride-hailing style operations — schema design, API integration, and a modernized, responsive frontend rebuild, covering the full stack from database to interface.</p>
           <div class="proj-links">
-            <a href="https://github.com/Asad-44/riderevenue-backend.git">Source →</a>
+            <a href="https://github.com/Asad-44/riderevenue-backend.git" target="_blank" rel="noopener noreferrer">Source →</a>
           </div>
         </div>
       </div>
@@ -491,9 +529,10 @@
       <span class="section-tag mono">05 — contact</span>
       <h2>Let's build something <em>secure.</em></h2>
       <ul class="contact-list">
+        <li><span class="label">contact Number</span><a href="tel:+923244299366">+92 3244299366</a></li>
         <li><span class="label">email</span><a href="mailto:asad.shafiq411@gmail.com">asad.shafiq411@gmail.com</a></li>
-        <li><span class="label">github</span><a href="https://github.com/asad-44">github.com/asad-44</a></li>
-        <li><span class="label">linkedin</span><a href="https://linkedin.com/in/muhammad-asad-shafiq">linkedin.com/in/muhammad-asad-shafiq</a></li>
+        <li><span class="label">github</span><a href="https://github.com/asad-44" target="_blank" rel="noopener noreferrer">github.com/asad-44</a></li>
+        <li><span class="label">linkedin</span><a href="https://linkedin.com/in/muhammad-asad-shafiq" target="_blank" rel="noopener noreferrer">linkedin.com/in/muhammad-asad-shafiq</a></li>
       </ul>
     </div>
   </section>
