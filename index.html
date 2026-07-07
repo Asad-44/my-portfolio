@@ -474,7 +474,7 @@
         <div class="proj-info">
           <h3>LockBox</h3>
           <span class="proj-tag">live</span>
-          <p>A zero-knowledge, encrypted note-sharing app — notes are encrypted client-side before they ever reach the server, so the backend never sees plaintext. Migrated the data layer from MSSQL to a managed Redis instance, replaced CryptoJS with the native Web Crypto API (AES-256-GCM + PBKDF2), and refactored a monolithic script into separate UI, crypto, and API modules. Deployed on Render.</p>
+          <p>LockBox is a zero-knowledge, encrypted note-sharing app. Every note is sealed client-side before it ever leaves the browser, so the server only ever handles ciphertext it can't read. Encryption runs on the native Web Crypto API with AES-256-GCM and PBKDF2 key derivation, backed by Redis for fast, low-overhead storage. The codebase is split into dedicated UI, crypto, and API modules, keeping the cryptographic logic isolated and easy to audit. Live on Render.</p>
           <div class="proj-links">
             <a href="https://lockbox-5it9.onrender.com" target="_blank" rel="noopener noreferrer">Live demo →</a>
 <a href="https://github.com/Asad-44/LockBox.git" target="_blank" rel="noopener noreferrer">Source →</a>
