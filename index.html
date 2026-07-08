@@ -1,608 +1,1027 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asad — Software Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1C1C1C;
-    --ink-2:#262626;
-    --paper:#EEF0F2;
-    --paper-2:#E2E5E8;
-    --signal:#6B6963;
-    --mist:#9C9A94;
-    --graphite:#57554F;
-    --line-dark:rgba(255,255,255,0.12);
-    --line-light:#DADDE0;
-    --max:1120px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    font-size:15px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces',serif;
-    margin:0;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit;text-decoration:none;}
-  a:focus-visible,button:focus-visible{
-    outline:2px solid var(--signal);
-    outline-offset:3px;
-  }
-  img{max-width:100%;height:auto;display:block;}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px;}
-  .mono{font-family:'IBM Plex Mono',monospace;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asad — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1C1C1C;
+      --ink-2: #262626;
+      --paper: #EEF0F2;
+      --paper-2: #E2E5E8;
+      --signal: #6B6963;
+      --mist: #9C9A94;
+      --graphite: #57554F;
+      --line-dark: rgba(255, 255, 255, 0.12);
+      --line-light: #DADDE0;
+      --max: 1120px;
+    }
 
-  /* NAV — mobile default */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(245,241,232,0.9);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line-light);
-  }
-  nav.wrap{
-    display:flex;align-items:center;justify-content:space-between;height:64px;
-  }
-  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:25px;}
-  .brand em{color:var(--signal);font-style:italic;}
-  .nav-links{
-    position:absolute;top:64px;left:0;right:0;
-    background:var(--paper);border-bottom:1px solid var(--line-light);
-    flex-direction:column;gap:0;padding:8px 20px 20px;display:none;
-    list-style:none;margin:0;
-  }
-  .nav-links a{
-    font-size:15px;font-weight:500;
-    padding:14px 0;
-    border-bottom:1px solid var(--line-light);
-    width:100%;
-    display:block;
-  }
-  .nav-links a:hover{border-color:var(--signal);}
-  .nav-toggle{display:none;}
-  .nav-toggle-label{display:block;cursor:pointer;font-size:24px;padding:8px;}
-  .nav-toggle:checked ~ .nav-links{display:flex;}
+    * {
+      box-sizing: border-box;
+    }
 
-  /* HERO — mobile default */
-  .hero{
-    background:var(--ink);
-    color:var(--paper);
-    padding:48px 0 40px;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero .wrap{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:24px;
-    align-items:start;
-  }
-  .hero .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:17px;
-    color:var(--signal);
-    display:block;
-    margin-bottom:20px;
-  }
-  .hero h1{
-    font-size:clamp(28px, 8vw, 32px);
-    font-weight:600;
-    line-height:1.1;
-  }
-  .hero h1 em{font-style:italic;font-weight:500;color:var(--signal);}
-  .hero p.lede{
-    max-width:100%;
-    color:var(--mist);
-    font-size:15px;
-    margin-top:20px;
-  }
-  .hero-cta{
-    margin-top:32px;
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    gap:14px;
-  }
-  .btn{
-    display:inline-block;
-    width:100%;
-    text-align:center;
-    font-size:14px;
-    font-weight:600;
-    padding:16px 24px;
-    border-radius:4px;
-    transition:transform .12s ease, background .15s ease, color .15s ease;
-  }
-  .btn-solid{background:var(--signal);color:var(--ink);}
-  .btn-solid:hover{transform:translateY(-2px);}
-  .btn-outline{border:1px solid var(--mist);color:var(--paper);}
-  .btn-outline:hover{border-color:var(--paper);transform:translateY(-2px);}
-  .stamp{display:none;}
-  .stamp span{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    letter-spacing:0.08em;
-    color:var(--paper);
-    line-height:1.6;
-    text-transform:uppercase;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* SECTION SCAFFOLD */
-  section{padding:48px 0;}
-  .section-tag{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
-    color:var(--signal);
-    display:block;
-    margin-bottom:14px;
-  }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* ABOUT */
-  .about{background:var(--paper);border-bottom:1px solid var(--line-light);}
-  .about-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:32px;
-    align-items:start;
-  }
-  .about-grid h2{font-size:24px;font-weight:500;max-width:100%;}
-  .dropcap::first-letter{
-    font-family:'Fraunces',serif;
-    font-size:40px;
-    font-weight:600;
-    float:left;
-    line-height:0.8;
-    margin:6px 8px 0 0;
-    color:var(--signal);
-  }
-  .about-grid p{color:var(--graphite);max-width:100%;margin-top:20px;font-size:16px;}
-  .fact-card{
-    background:var(--paper-2);
-    border:1px solid var(--line-light);
-    border-radius:6px;
-    padding:24px;
-  }
-  .fact-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:16px;
-    padding:12px 0;
-    border-bottom:1px solid var(--line-light);
-    font-size:14px;
-  }
-  .fact-row:last-child{border-bottom:none;}
-  .fact-row .k{color:var(--graphite);}
-  .fact-row .v{
-    font-weight:600;
-    font-family:'IBM Plex Mono',monospace;
-    text-align:right;
-    line-height:1.5;
-  }
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', serif;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
 
-  /* PROJECTS */
-  .projects{background:var(--ink);color:var(--paper);}
-  .projects .section-tag{color:var(--signal);}
-  .projects > .wrap > h2{font-size:26px;font-weight:500;margin-bottom:36px;color:var(--paper);}
-  .proj-row{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:0;
-    border:1px solid var(--line-dark);
-    border-radius:8px;
-    overflow:hidden;
-    margin-bottom:24px;
-  }
-  .proj-row.reverse{grid-template-columns:1fr;}
-  .proj-row.reverse .proj-panel, .proj-row.reverse .proj-info{order:initial;}
-  .proj-panel{
-    height:220px;
-    background:var(--ink-2);
-    display:flex;align-items:center;justify-content:center;
-    padding:16px;
-    border-right:none;
-    border-bottom:1px solid var(--line-dark);
-  }
-  .proj-row.reverse .proj-panel{border-left:none;}
-  .proj-panel .num{
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    font-size:44px;
-    font-weight:500;
-    color:var(--signal);
-  }
-  .proj-info{padding:24px 20px;}
-  .proj-info h3{font-size:20px;font-weight:600;color:var(--paper);}
-  .proj-tag{
-    display:inline-block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    color:var(--signal);
-    border:1px solid var(--signal);
-    padding:3px 10px;
-    border-radius:999px;
-    margin:12px 0 16px;
-  }
-  .proj-info p{color:var(--mist);font-size:15px;max-width:100%;}
-  .proj-links{margin-top:18px;display:flex;flex-direction:column;gap:12px;}
-  .proj-links a{
-    font-size:13px;font-weight:600;color:var(--paper);
-    border-bottom:1px solid var(--signal);
-    padding-bottom:2px;
-    width:fit-content;
-  }
-  .proj-links a:hover{color:var(--signal);}
-  .fyp-note{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
-    color:var(--mist);
-    margin-top:8px;
-  }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  /* SKILLS */
-  .skills{background:var(--paper);border-bottom:1px solid var(--line-light);}
-  .skill-group{margin-bottom:32px;}
-  .skill-group h3{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
-    font-weight:500;
-    color:var(--graphite);
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    margin-bottom:16px;
-  }
-  .sticker-row{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-  }
-  .sticker{
-    font-size:13px;
-    font-weight:500;
-    padding:12px 10px;
-    background:var(--paper-2);
-    border:1px solid var(--line-light);
-    border-radius:6px;
-    text-align:center;
-  }
-  .sticker.pop{background:var(--signal);color:var(--paper);border-color:var(--signal);}
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--signal);
+      outline-offset: 3px;
+    }
 
-  /* EDUCATION */
-  .education{background:var(--paper);}
-  .edu-row{
-    display:flex;flex-direction:column;
-    gap:8px;
-    border-top:1px solid var(--line-light);
-    padding-top:32px;
-  }
-  .edu-row h3{font-size:22px;font-weight:500;}
-  .edu-row .school{color:var(--graphite);margin-top:6px;font-size:15px;}
-  .edu-row .term{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:13px;color:var(--graphite);white-space:nowrap;
-  }
-  .coursework{margin-top:24px;color:var(--graphite);font-size:13px;max-width:640px;}
-  .coursework span{color:var(--ink);font-weight:600;}
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
 
-  /* CONTACT */
-  .contact{background:var(--ink);color:var(--paper);}
-  .contact h2{
-    font-size:26px;font-weight:500;max-width:100%;line-height:1.15;
-  }
-  .contact h2 em{font-style:italic;color:var(--signal);}
-  .contact-list{list-style:none;margin:40px 0 0;padding:0;max-width:520px;}
-  .contact-list li{
-    display:flex;flex-direction:column;align-items:flex-start;
-    gap:6px;
-    padding:16px 0;
-    border-bottom:1px solid var(--line-dark);
-  }
-  .contact-list li:first-child{border-top:1px solid var(--line-dark);}
-  .contact-list .label{
-    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--mist);
-  }
-  .contact-list a{font-size:16px;font-weight:600;transition:color .15s ease;}
-  .contact-list a:hover{color:var(--signal);}
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-  /* FOOTER */
-  footer{background:var(--ink);color:var(--mist);padding:28px 0;border-top:1px solid var(--line-dark);}
-  footer .wrap{display:flex;flex-direction:column;text-align:left;gap:12px;}
-  footer .mono{font-size:12px;}
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
 
-  /* PROJECT IMAGE */
-  .project-img{
-    max-width:100%;
-    max-height:100%;
-    width:auto;
-    height:auto;
-    object-fit:contain;
-  }
-  .project-img:hover{transform:scale(1.02);}
+    /* NAV — mobile default */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 241, 232, 0.9);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line-light);
+    }
 
-  /* ============================================
+    nav.wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 25px;
+    }
+
+    .brand em {
+      color: var(--signal);
+      font-style: italic;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line-light);
+      flex-direction: column;
+      gap: 0;
+      padding: 8px 20px 20px;
+      display: none;
+      list-style: none;
+      margin: 0;
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line-light);
+      width: 100%;
+      display: block;
+    }
+
+    .nav-links a:hover {
+      border-color: var(--signal);
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-toggle-label {
+      display: block;
+      cursor: pointer;
+      font-size: 24px;
+      padding: 8px;
+    }
+
+    .nav-toggle:checked~.nav-links {
+      display: flex;
+    }
+
+    /* HERO — mobile default */
+    .hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 48px 0 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero .wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .hero .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 17px;
+      color: var(--signal);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 8vw, 32px);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--signal);
+    }
+
+    .hero p.lede {
+      max-width: 100%;
+      color: var(--mist);
+      font-size: 15px;
+      margin-top: 20px;
+    }
+
+    .hero-cta {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 16px 24px;
+      border-radius: 4px;
+      transition: transform .12s ease, background .15s ease, color .15s ease;
+    }
+
+    .btn-solid {
+      background: var(--signal);
+      color: var(--ink);
+    }
+
+    .btn-solid:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--mist);
+      color: var(--paper);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--paper);
+      transform: translateY(-2px);
+    }
+
+    .stamp {
+      display: none;
+    }
+
+    .stamp span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--paper);
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    /* SECTION SCAFFOLD */
+    section {
+      padding: 48px 0;
+    }
+
+    .section-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--signal);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .about-grid h2 {
+      font-size: 24px;
+      font-weight: 500;
+      max-width: 100%;
+    }
+
+    .dropcap::first-letter {
+      font-family: 'Fraunces', serif;
+      font-size: 40px;
+      font-weight: 600;
+      float: left;
+      line-height: 0.8;
+      margin: 6px 8px 0 0;
+      color: var(--signal);
+    }
+
+    .about-grid p {
+      color: var(--graphite);
+      max-width: 100%;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .fact-card {
+      background: var(--paper-2);
+      border: 1px solid var(--line-light);
+      border-radius: 6px;
+      padding: 24px;
+    }
+
+    .fact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line-light);
+      font-size: 14px;
+    }
+
+    .fact-row:last-child {
+      border-bottom: none;
+    }
+
+    .fact-row .k {
+      color: var(--graphite);
+    }
+
+    .fact-row .v {
+      font-weight: 600;
+      font-family: 'IBM Plex Mono', monospace;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    /* PROJECTS */
+    .projects {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .projects .section-tag {
+      color: var(--signal);
+    }
+
+    .projects>.wrap>h2 {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 36px;
+      color: var(--paper);
+    }
+
+    .proj-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border: 1px solid var(--line-dark);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .proj-row.reverse {
+      grid-template-columns: 1fr;
+    }
+
+    .proj-row.reverse .proj-panel,
+    .proj-row.reverse .proj-info {
+      order: initial;
+    }
+
+    .proj-panel {
+      height: 220px;
+      background: var(--ink-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      border-right: none;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .proj-row.reverse .proj-panel {
+      border-left: none;
+    }
+
+    .proj-panel .num {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 44px;
+      font-weight: 500;
+      color: var(--signal);
+    }
+
+    .proj-info {
+      padding: 24px 20px;
+    }
+
+    .proj-info h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--paper);
+    }
+
+    .proj-tag {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--signal);
+      border: 1px solid var(--signal);
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin: 12px 0 16px;
+    }
+
+    .proj-info p {
+      color: var(--mist);
+      font-size: 15px;
+      max-width: 100%;
+    }
+
+    .proj-links {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .proj-links a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--paper);
+      border-bottom: 1px solid var(--signal);
+      padding-bottom: 2px;
+      width: fit-content;
+    }
+
+    .proj-links a:hover {
+      color: var(--signal);
+    }
+
+    .fyp-note {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--mist);
+      margin-top: 8px;
+    }
+
+    /* SKILLS */
+    .skills {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .skill-group {
+      margin-bottom: 32px;
+    }
+
+    .skill-group h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--graphite);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+
+    .sticker-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .sticker {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 10px;
+      background: var(--paper-2);
+      border: 1px solid var(--line-light);
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .sticker.pop {
+      background: var(--signal);
+      color: var(--paper);
+      border-color: var(--signal);
+    }
+
+    /* EDUCATION */
+    .education {
+      background: var(--paper);
+    }
+
+    .edu-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-top: 1px solid var(--line-light);
+      padding-top: 32px;
+    }
+
+    .edu-row h3 {
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .edu-row .school {
+      color: var(--graphite);
+      margin-top: 6px;
+      font-size: 15px;
+    }
+
+    .edu-row .term {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--graphite);
+      white-space: nowrap;
+    }
+
+    .coursework {
+      margin-top: 24px;
+      color: var(--graphite);
+      font-size: 13px;
+      max-width: 640px;
+    }
+
+    .coursework span {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* CONTACT */
+    .contact {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .contact h2 {
+      font-size: 26px;
+      font-weight: 500;
+      max-width: 100%;
+      line-height: 1.15;
+    }
+
+    .contact h2 em {
+      font-style: italic;
+      color: var(--signal);
+    }
+
+    .contact-list {
+      list-style: none;
+      margin: 40px 0 0;
+      padding: 0;
+      max-width: 520px;
+    }
+
+    .contact-list li {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .contact-list li:first-child {
+      border-top: 1px solid var(--line-dark);
+    }
+
+    .contact-list .label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--mist);
+    }
+
+    .contact-list a {
+      font-size: 16px;
+      font-weight: 600;
+      transition: color .15s ease;
+    }
+
+    .contact-list a:hover {
+      color: var(--signal);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      color: var(--mist);
+      padding: 28px 0;
+      border-top: 1px solid var(--line-dark);
+    }
+
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 12px;
+    }
+
+    footer .mono {
+      font-size: 12px;
+    }
+
+    /* PROJECT IMAGE */
+    .project-img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .project-img:hover {
+      transform: scale(1.02);
+    }
+
+    /* ============================================
      TABLET & UP (≥760px) — progressive enhancement
      ============================================ */
-  @media (min-width: 760px){
-    .wrap{padding:0 40px;}
+    @media (min-width: 760px) {
+      .wrap {
+        padding: 0 40px;
+      }
 
-    nav.wrap{height:72px;}
-    .nav-toggle-label{display:none;}
-    .nav-links{
-      position:static;display:flex;flex-direction:row;gap:32px;
-      background:none;border:none;padding:0;
+      nav.wrap {
+        height: 72px;
+      }
+
+      .nav-toggle-label {
+        display: none;
+      }
+
+      .nav-links {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      .nav-links a {
+        padding-bottom: 3px;
+        border-bottom: 2px solid transparent;
+        width: auto;
+      }
+
+      .hero {
+        padding: 65px 0 84px;
+      }
+
+      .hero .wrap {
+        grid-template-columns: 1.4fr 0.6fr;
+        gap: 32px;
+      }
+
+      .hero .eyebrow {
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 6vw, 58px);
+      }
+
+      .hero p.lede {
+        font-size: 17px;
+        max-width: 520px;
+        margin-top: 24px;
+      }
+
+      .hero-cta {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        gap: 16px;
+      }
+
+      .btn {
+        width: auto;
+        padding: 14px 24px;
+      }
+
+      .stamp {
+        display: flex;
+        justify-self: end;
+        width: 110px;
+        height: 110px;
+        border: 1.5px dashed var(--signal);
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transform: rotate(-9deg);
+        padding: 14px;
+      }
+
+      section {
+        padding: 88px 0;
+      }
+
+      .about-grid {
+        grid-template-columns: 1.5fr 1fr;
+        gap: 56px;
+      }
+
+      .about-grid h2 {
+        font-size: 30px;
+        max-width: 520px;
+      }
+
+      .about-grid p {
+        max-width: 520px;
+      }
+
+      .dropcap::first-letter {
+        font-size: 52px;
+      }
+
+      .projects>.wrap>h2 {
+        font-size: 32px;
+        margin-bottom: 48px;
+      }
+
+      .proj-row,
+      .proj-row.reverse {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .proj-row.reverse .proj-panel {
+        order: 2;
+      }
+
+      .proj-row.reverse .proj-info {
+        order: 1;
+      }
+
+      .proj-panel {
+        height: 350px;
+        padding: 40px;
+        border-right: 1px solid var(--line-dark);
+        border-bottom: none;
+      }
+
+      .proj-row.reverse .proj-panel {
+        border-right: none;
+        border-left: 1px solid var(--line-dark);
+      }
+
+      .proj-panel .num {
+        font-size: 64px;
+      }
+
+      .proj-info {
+        padding: 36px 40px;
+      }
+
+      .proj-info h3 {
+        font-size: 24px;
+      }
+
+      .proj-info p {
+        max-width: 460px;
+      }
+
+      .proj-links {
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      .proj-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .proj-stack span {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        color: var(--mist);
+        border: 1px solid var(--line-dark);
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+
+      .sticker-row {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+
+      .edu-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .contact h2 {
+        font-size: 44px;
+        max-width: 640px;
+      }
+
+      .contact-list li {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      footer .wrap {
+        flex-direction: row;
+        justify-content: space-between;
+      }
     }
-    .nav-links a{padding-bottom:3px;border-bottom:2px solid transparent;width:auto;}
 
-    .hero{padding:65px 0 84px;}
-    .hero .wrap{grid-template-columns:1.4fr 0.6fr;gap:32px;}
-    .hero .eyebrow{font-size:13px;margin-bottom:24px;}
-    .hero h1{font-size:clamp(38px, 6vw, 58px);}
-    .hero p.lede{font-size:17px;max-width:520px;margin-top:24px;}
-    .hero-cta{flex-direction:row;flex-wrap:wrap;margin-top:40px;gap:16px;}
-    .btn{width:auto;padding:14px 24px;}
-    .stamp{
-      display:flex;justify-self:end;width:110px;height:110px;
-      border:1.5px dashed var(--signal);border-radius:50%;
-      align-items:center;justify-content:center;text-align:center;
-      transform:rotate(-9deg);padding:14px;
-    }
-
-    section{padding:88px 0;}
-
-    .about-grid{grid-template-columns:1.5fr 1fr;gap:56px;}
-    .about-grid h2{font-size:30px;max-width:520px;}
-    .about-grid p{max-width:520px;}
-    .dropcap::first-letter{font-size:52px;}
-
-    .projects > .wrap > h2{font-size:32px;margin-bottom:48px;}
-    .proj-row, .proj-row.reverse{grid-template-columns:1fr 1fr;}
-    .proj-row.reverse .proj-panel{order:2;}
-    .proj-row.reverse .proj-info{order:1;}
-    .proj-panel{
-      height:350px;padding:40px;
-      border-right:1px solid var(--line-dark);
-      border-bottom:none;
-    }
-    .proj-row.reverse .proj-panel{border-right:none;border-left:1px solid var(--line-dark);}
-    .proj-panel .num{font-size:64px;}
-    .proj-info{padding:36px 40px;}
-    .proj-info h3{font-size:24px;}
-    .proj-info p{max-width:460px;}
-    .proj-links{flex-direction:row;gap:20px;}
-    .proj-stack{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:16px;
-}
-.proj-stack span{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-  color:var(--mist);
-  border:1px solid var(--line-dark);
-  padding:4px 10px;
-  border-radius:999px;
-}
-    .sticker-row{grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));}
-
-    .edu-row{flex-direction:row;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
-
-    .contact h2{font-size:44px;max-width:640px;}
-    .contact-list li{flex-direction:row;justify-content:space-between;align-items:center;}
-
-    footer .wrap{flex-direction:row;justify-content:space-between;}
-  }
-
-  /* ============================================
+    /* ============================================
      DESKTOP (≥1024px)
      ============================================ */
-  @media (min-width: 1024px){
-    .stamp{width:150px;height:150px;}
-  }
-</style>
+    @media (min-width: 1024px) {
+      .stamp {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <nav class="wrap">
-    <div class="brand">Asad<em>.</em></div>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-toggle-label">☰</label>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Work</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <nav class="wrap">
+      <div class="brand">Asad<em>.</em></div>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle-label">☰</label>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main>
-  <section class="hero">
-    <div class="wrap">
-      <div>
-        <span class="eyebrow mono">software engineer · building toward cybersecurity</span>
-        <h1>I build systems, then learn how <em>they'd be broken.</em></h1>
-        <p class="lede">Asad — a Software Engineering undergraduate who ships full projects end to end, with a growing focus on cybersecurity: cloud security, network security, and the encryption and forensics underneath it all.</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-solid">See the work</a>
-          <a href="/Asad_s_Resume.pdf"
-   class="btn btn-outline"
-   target="_blank"
-   rel="noopener noreferrer">
-   View résumé
-</a>
-          <a href="#contact" class="btn btn-outline">Say hello</a>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <span class="eyebrow mono">software engineer · building toward cybersecurity</span>
+          <h1>I build systems, then learn how <em>they'd be broken.</em></h1>
+          <p class="lede">Asad — a Software Engineering undergraduate who ships full projects end to end, with a growing
+            focus on cybersecurity: cloud security, network security, and the encryption and forensics underneath it
+            all.</p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-solid">See the work</a>
+            <a href="/Asad_s_Resume.pdf" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+              View résumé
+            </a>
+            <a href="#contact" class="btn btn-outline">Say hello</a>
+          </div>
         </div>
-      </div>
-      <!-- <div class="stamp">
+        <!-- <div class="stamp">
         <span>secured<br>by design<br>— 2026 —</span>
       </div> -->
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div class="wrap">
-      <span class="section-tag mono">01 — about</span>
-      <div class="about-grid">
-        <div>
-          <h2>Most of my work goes into finishing things, not just starting them.</h2>
-          <p class="dropcap">I'm currently pursuing my Bachelors in Software Engineering from COMSATS University Islamabad, Lahore Campus and most of my time goes into shipping complete projects — architecture, backend, interface, deployment — rather than isolated exercises. Alongside that, I've been going deeper into security: applied cryptography, digital forensics fundamentals, and how attackers approach systems, which is shaping where I want my final year project and early career to go.</p>
-        </div>
-        <div class="fact-card">
-          <div class="fact-row">
-  <span class="k">Focus</span>
-  <span class="v">Software Engineering<br>Cybersecurity<br>Network Security</span>
-</div>
-          <!-- <div class="fact-row"><span class="k">Languages</span><span class="v">5</span></div> -->
-          <div class="fact-row"><span class="k">Shipped projects</span><span class="v">2+</span></div>
-          <div class="fact-row"><span class="k">Based in</span><span class="v">Lahore, Pakistan</span></div>
-          <div class="fact-row"><span class="k">Status</span><span class="v">open to work</span></div>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="projects" class="projects">
-    <div class="wrap">
-      <span class="section-tag mono">02 — work</span>
-      <h2>Selected projects</h2>
-
-      <div class="proj-row">
-        <div class="proj-panel">
-  <img src="/lockbox.png" alt="LockBox Screenshot" class="project-img">
-</div>
-        <div class="proj-info">
-          <h3>LockBox</h3>
-          <span class="proj-tag">live</span>
-          <p>LockBox is a zero-knowledge, encrypted note-sharing app. Every note is sealed client-side before it ever leaves the browser, so the server only ever handles ciphertext it can't read. Encryption runs on the native Web Crypto API with AES-256-GCM and PBKDF2 key derivation, backed by Redis for fast, low-overhead storage. The codebase is split into dedicated UI, crypto, and API modules, keeping the cryptographic logic isolated and easy to audit. Live on Render.</p>
-          <!-- LockBox -->
-<div class="proj-stack">
-  <span>JavaScript</span>
-  <span>Web Crypto API</span>
-  <span>Redis</span>
-  <span>Node.js</span>
-  <span>Render</span>
-</div>
-          <div class="proj-links">
-            <a href="https://lockbox-5it9.onrender.com" target="_blank" rel="noopener noreferrer">Live demo →</a>
-<a href="https://github.com/Asad-44/LockBox.git" target="_blank" rel="noopener noreferrer">Source →</a>
+    <section id="about" class="about">
+      <div class="wrap">
+        <span class="section-tag mono">01 — about</span>
+        <div class="about-grid">
+          <div>
+            <h2>Most of my work goes into finishing things, not just starting them.</h2>
+            <p class="dropcap">I'm currently pursuing my Bachelors in Software Engineering from COMSATS University
+              Islamabad, Lahore Campus and most of my time goes into shipping complete projects — architecture, backend,
+              interface, deployment — rather than isolated exercises. Alongside that, I've been going deeper into
+              security: applied cryptography, digital forensics fundamentals, and how attackers approach systems, which
+              is shaping where I want my final year project and early career to go.</p>
+          </div>
+          <div class="fact-card">
+            <div class="fact-row">
+              <span class="k">Focus</span>
+              <span class="v">Software Engineering<br>Cybersecurity<br>Network Security</span>
+            </div>
+            <!-- <div class="fact-row"><span class="k">Languages</span><span class="v">5</span></div> -->
+            <div class="fact-row"><span class="k">Shipped projects</span><span class="v">2+</span></div>
+            <div class="fact-row"><span class="k">Based in</span><span class="v">Lahore, Pakistan</span></div>
+            <div class="fact-row"><span class="k">Status</span><span class="v">open to work</span></div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="proj-row reverse">
-        <div class="proj-panel"><span class="num">Ride Revenue Tracker</span></div>
-        <div class="proj-info">
-          <h3>Ride Revenue Tracker</h3>
-          <span class="proj-tag">complete</span>
-          <p>A revenue tracking tool for ride-hailing style operations — schema design, API integration, and a modernized, responsive frontend rebuild, covering the full stack from database to interface.</p>
-          <!-- Ride Revenue Tracker -->
-<div class="proj-stack">
-  <span>Node.js</span>
-  <span>Express</span>
-  <span>MySQL</span>
-  <span>Vanilla JS</span>
-</div>
-          <div class="proj-links">
-            <a href="https://github.com/Asad-44/riderevenue-backend.git" target="_blank" rel="noopener noreferrer">Source →</a>
+    <section id="projects" class="projects">
+      <div class="wrap">
+        <span class="section-tag mono">02 — work</span>
+        <h2>Selected projects</h2>
+
+        <div class="proj-row">
+          <div class="proj-panel">
+            <img src="/lockbox.png" alt="LockBox Screenshot" class="project-img">
+          </div>
+          <div class="proj-info">
+            <h3>LockBox</h3>
+            <span class="proj-tag">live</span>
+            <p>LockBox is a zero-knowledge, encrypted note-sharing app. Every note is sealed client-side before it ever
+              leaves the browser, so the server only ever handles ciphertext it can't read. Encryption runs on the
+              native Web Crypto API with AES-256-GCM and PBKDF2 key derivation, backed by Redis for fast, low-overhead
+              storage. The codebase is split into dedicated UI, crypto, and API modules, keeping the cryptographic logic
+              isolated and easy to audit. Live on Render.</p>
+
+            <div class="proj-stack">
+              <span>JavaScript</span>
+              <span>Web Crypto API</span>
+              <span>Redis</span>
+              <span>Node.js</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://lockbox-5it9.onrender.com" target="_blank" rel="noopener noreferrer">Live demo →</a>
+              <a href="https://github.com/Asad-44/LockBox.git" target="_blank" rel="noopener noreferrer">Source →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-row reverse">
+          <div class="proj-panel"><span class="num">Ride Revenue Tracker</span></div>
+          <div class="proj-info">
+            <h3>Ride Revenue Tracker</h3>
+            <span class="proj-tag">complete</span>
+            <p>A revenue tracking tool for ride-hailing style operations — schema design, API integration, and a
+              modernized, responsive frontend rebuild, covering the full stack from database to interface.</p>
+            <!-- Ride Revenue Tracker -->
+            <div class="proj-stack">
+              <span>Node.js</span>
+              <span>Express</span>
+              <span>MySQL</span>
+              <span>Vanilla JS</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/Asad-44/riderevenue-backend.git" target="_blank"
+                rel="noopener noreferrer">Source →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- <p class="fyp-note">// currently scoping a final year project in digital forensics &amp; incident response</p> -->
+      </div>
+    </section>
+
+    <section id="skills" class="skills">
+      <div class="wrap">
+        <span class="section-tag mono">03 — skills</span>
+        <div class="skill-group">
+          <h3>Programming Languages</h3>
+          <div class="sticker-row">
+            <span class="sticker">C++</span>
+            <span class="sticker">Java</span>
+            <span class="sticker">Python</span>
+            <span class="sticker">Web Technologies</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Networking</h3>
+          <div class="sticker-row">
+            <span class="sticker pop">OSI Model</span>
+            <span class="sticker pop">TCP/IP Stack</span>
+            <span class="sticker">Subnetting</span>
+            <span class="sticker">DNS</span>
+            <span class="sticker">HTTP/S</span>
+            <span class="sticker">Network Protocols</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Core CS Concepts</h3>
+          <div class="sticker-row">
+            <span class="sticker">Object-Oriented Programming (OOP)</span>
+            <span class="sticker">Data Structures &amp; Algorithms</span>
+            <span class="sticker">File Handling</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Tools &amp; Platforms</h3>
+          <div class="sticker-row">
+            <span class="sticker">Git</span>
+            <span class="sticker">GitHub</span>
+            <span class="sticker">Linux</span>
+            <span class="sticker">Cisco Packet Tracer</span>
+            <span class="sticker">Wireshark</span>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- <p class="fyp-note">// currently scoping a final year project in digital forensics &amp; incident response</p> -->
-    </div>
-  </section>
-
-  <section id="skills" class="skills">
-  <div class="wrap">
-    <span class="section-tag mono">03 — skills</span>
-    <div class="skill-group">
-      <h3>Programming Languages</h3>
-      <div class="sticker-row">
-        <span class="sticker">C++</span>
-        <span class="sticker">Java</span>
-        <span class="sticker">Python</span>
-        <span class="sticker">Web Technologies</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <h3>Networking</h3>
-      <div class="sticker-row">
-        <span class="sticker pop">OSI Model</span>
-        <span class="sticker pop">TCP/IP Stack</span>
-        <span class="sticker">Subnetting</span>
-        <span class="sticker">DNS</span>
-        <span class="sticker">HTTP/S</span>
-        <span class="sticker">Network Protocols</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <h3>Core CS Concepts</h3>
-      <div class="sticker-row">
-        <span class="sticker">Object-Oriented Programming (OOP)</span>
-        <span class="sticker">Data Structures &amp; Algorithms</span>
-        <span class="sticker">File Handling</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <h3>Tools &amp; Platforms</h3>
-      <div class="sticker-row">
-        <span class="sticker">Git</span>
-        <span class="sticker">GitHub</span>
-        <span class="sticker">Linux</span>
-        <span class="sticker">Cisco Packet Tracer</span>
-        <span class="sticker">Wireshark</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <section id="education" class="education">
-    <div class="wrap">
-      <span class="section-tag mono">04 — education</span>
-      <div class="edu-row">
-        <div>
-          <h3>BS Software Engineering</h3>
-          <div class="school">COMSATS University Islamabad, Lahore Campus</div>
+    <section id="education" class="education">
+      <div class="wrap">
+        <span class="section-tag mono">04 — education</span>
+        <div class="edu-row">
+          <div>
+            <h3>BS Software Engineering</h3>
+            <div class="school">COMSATS University Islamabad, Lahore Campus</div>
+          </div>
+          <div class="term">2024 - 2028</div>
         </div>
-        <div class="term">2024 - 2028</div>
+        <p class="coursework"><span>Relevant coursework:</span> Computer Networks, Operating Systems, Object-Oriented
+          Programming, Data Structures & Algorithms, Software Engineering, Software Design & Architecture.</p>
       </div>
-      <p class="coursework"><span>Relevant coursework:</span> Computer Networks, Operating Systems, Object-Oriented Programming, Data Structures & Algorithms, Software Engineering, Software Design & Architecture.</p>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact" class="contact">
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <span class="section-tag mono">05 — contact</span>
+        <h2>Let's build something <em>secure.</em></h2>
+        <ul class="contact-list">
+          <li><span class="label">email</span><a href="mailto:asad.shafiq411@gmail.com">asad.shafiq411@gmail.com</a>
+          </li>
+          <li><span class="label">github</span><a href="https://github.com/asad-44" target="_blank"
+              rel="noopener noreferrer">github.com/asad-44</a></li>
+          <li><span class="label">linkedin</span><a href="https://linkedin.com/in/muhammad-asad-shafiq" target="_blank"
+              rel="noopener noreferrer">linkedin.com/in/muhammad-asad-shafiq</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
     <div class="wrap">
-      <span class="section-tag mono">05 — contact</span>
-      <h2>Let's build something <em>secure.</em></h2>
-      <ul class="contact-list">
-        <li><span class="label">email</span><a href="mailto:asad.shafiq411@gmail.com">asad.shafiq411@gmail.com</a></li>
-        <li><span class="label">github</span><a href="https://github.com/asad-44" target="_blank" rel="noopener noreferrer">github.com/asad-44</a></li>
-        <li><span class="label">linkedin</span><a href="https://linkedin.com/in/muhammad-asad-shafiq" target="_blank" rel="noopener noreferrer">linkedin.com/in/muhammad-asad-shafiq</a></li>
-      </ul>
+      <span class="mono">© 2026 Asad</span>
+      <span class="mono">last updated: July 2026</span>
     </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <span class="mono">© 2026 Asad</span>
-    <span class="mono">last updated: July 2026</span>
-  </div>
-</footer>
+  </footer>
 
 </body>
+
 </html>
